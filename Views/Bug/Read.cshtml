@@ -1,0 +1,44 @@
+﻿<script src="~/js/view/Bug.js"></script>
+<script type="text/javascript">
+    $(function () {
+        _me.init();
+    });
+</script>
+
+@await Component.InvokeAsync("XgProgPath", new { names = new string[] { "Bug Query" } })
+<div class="xp-prog">
+    <div id="divRead">
+        <form id='formRead' class='xg-form'>
+            <div class="row">
+                @await Component.InvokeAsync("XiSelect", new XiSelectDto { Title = "Project", Fid = "project_id", Rows = (List<IdStrDto>)ViewBag.Projects, InRow = true })
+                @await Component.InvokeAsync("XgFindTbar", new XgFindTbarDto { HasReset = true })
+            </div>
+            @await Component.InvokeAsync("XiText", new XiTextDto { Title = "Summary", Fid = "summary" })
+            @await Component.InvokeAsync("XiSelect", new XiSelectDto { Title = "Version", Fid = "os_build", Rows = (List<IdStrDto>)ViewBag.Versions })
+            @await Component.InvokeAsync("XiSelect", new XiSelectDto { Title = "Status", Fid = "status", Rows = (List<IdStrDto>)ViewBag.Statuses })
+        </form>
+        <div class='xg-btns-box'>
+            @await Component.InvokeAsync("XgExport")
+        </div>
+
+        <table id="tableRead" class="table table-bordered xg-table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Summary</th>
+                    <th>Status</th>
+                    <th>Handler</th>
+                    <th>Version</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    @*
+    <div id="divEdit" class="xg-hide">
+        <partial name="Edit" />
+    </div>
+    *@
+</div>
